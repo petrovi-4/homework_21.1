@@ -3,12 +3,14 @@ from django.conf.urls.static import static
 from django.urls import path
 
 from blog.apps import BlogConfig
-from blog.views import
+from blog.views import BlogPostListView, BlogPostCreateView, BlogPostDetailView, BlogPostUpdateView, BlogPostDeleteView
 
 app_name = BlogConfig.name
 
 urlpatterns = [
-    path('', IndexView.as_view(), name='index'),
-    path('contacts/', ContactView.as_view(), name='contact'),
-    path('product/<pk>', ProductDetailView.as_view(), name='product')
+    path('', BlogPostListView.as_view(), name='list'),
+    path('create/', BlogPostCreateView.as_view(), name='create'),
+    path('edit/<slug>', BlogPostUpdateView.as_view(), name='edit'),
+    path('view/<slug>', BlogPostDetailView.as_view(), name='view'),
+    path('delete/<slug>', BlogPostDeleteView.as_view(), name='delete'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
