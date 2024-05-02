@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import TemplateView, DetailView
 
 from catalog.models import Product
@@ -25,19 +24,6 @@ class ContactView(TemplateView):
         message = request.POST.get('message')
         print(f'Новое сообщение от пользователя {name}({email}): {message}')
         return self.render_to_response({'title': 'Контакты'})
-
-
-
-# def contact(request):
-#     if request.method == 'POST':
-#         name = request.POST.get('name')
-#         email = request.POST.get('email')
-#         message = request.POST.get('message')
-#         print(f'Новое сообщение от пользователя {name}({email}): {message}')
-#     context = {
-#         'title': 'Контакты'
-#     }
-#     return render(request, 'catalog/contacts.html', context)
 
 
 class ProductDetailView(DetailView):
