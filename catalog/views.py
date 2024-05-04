@@ -16,7 +16,7 @@ class IndexView(TemplateView):
 
 
 class ContactView(TemplateView):
-    template_name = 'catalog/contacts.html'
+    template_name = 'catalog/contact.html'
 
     def post(self, request, *args, **kwargs):
         name = request.POST.get('name')
@@ -28,6 +28,7 @@ class ContactView(TemplateView):
 
 class ProductDetailView(DetailView):
     model = Product
+    template_name = 'catalog/product_detail.html'
 
     def get_queryset(self):
         queryset = super().get_queryset()
