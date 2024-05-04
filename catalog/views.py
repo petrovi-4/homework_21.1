@@ -4,7 +4,7 @@ from catalog.models import Product
 
 
 class IndexView(TemplateView):
-    template_name = 'catalog/index.html'
+    template_name = 'catalog/catalog_list.html'
     extra_context = {
         'title': 'Главная страница'
     }
@@ -16,7 +16,7 @@ class IndexView(TemplateView):
 
 
 class ContactView(TemplateView):
-    template_name = 'catalog/contacts.html'
+    template_name = 'catalog/contact.html'
 
     def post(self, request, *args, **kwargs):
         name = request.POST.get('name')
@@ -28,6 +28,7 @@ class ContactView(TemplateView):
 
 class ProductDetailView(DetailView):
     model = Product
+    template_name = 'catalog/product_detail.html'
 
     def get_queryset(self):
         queryset = super().get_queryset()
