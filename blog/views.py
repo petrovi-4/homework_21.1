@@ -1,5 +1,7 @@
 from django.urls import reverse_lazy, reverse
+from django.utils.crypto import get_random_string
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
+from pytils.translit import slugify
 
 from blog.models import BlogPost
 
@@ -8,6 +10,14 @@ class BlogPostCreateView(CreateView):
     model = BlogPost
     fields = ('title', 'content', 'preview_image', 'is_published')
     success_url = reverse_lazy('blog:list')
+
+    def form_valid(self, form):
+        base_slug = slugify(form.instance.title)
+        unique_slug = base_slug
+        while BlogPost.objects.filter(slug=unique_slug).exists():
+            unique_slug = f'{base_slug}-{get_random_string(4)}'
+        form.instance.slug = unique_slug
+        return super().form_valid(form)
 
 
 class BlogPostUpdateView(UpdateView):
