@@ -17,6 +17,7 @@ class BlogPostCreateView(CreateView):
         while BlogPost.objects.filter(slug=unique_slug).exists():
             unique_slug = f'{base_slug}-{get_random_string(4)}'
         form.instance.slug = unique_slug
+        form.instance.save()
         return super().form_valid(form)
 
 
